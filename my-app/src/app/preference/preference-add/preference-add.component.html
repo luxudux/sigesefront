@@ -1,0 +1,104 @@
+<mat-card>
+  <form [formGroup]="grupoForm" (submit)=createResource()>
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>add</mat-icon>
+        <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #nombre value="" placeholder="Nombre" formControlName="nombre">
+            <mat-hint align="end">{{nombre.value.length}} / {{ updateNombreMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #icono value="" placeholder="Icono" formControlName="icono">
+            <mat-hint align="end">{{icono.value.length}} / {{ updateIconoMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['icono'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['icono'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['icono'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #colorIcono value="" placeholder="Color del Icono" formControlName="colorIcono">
+            <mat-hint align="start"><strong>#CCBBDD</strong> </mat-hint>
+            <mat-hint align="end">{{colorIcono.value.length}} / {{ updateColorIconoMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['colorIcono'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorIcono'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorIcono'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #colorTexto value="" placeholder="Color del Texto" formControlName="colorTexto">
+            <mat-hint align="start"><strong>#CCBBDD</strong> </mat-hint>
+            <mat-hint align="end">{{colorTexto.value.length}} / {{ updateColorTextoMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['colorTexto'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorTexto'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorTexto'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #colorBack value="" placeholder="Color de Fondo" formControlName="colorBack">
+            <mat-hint align="start"><strong>#CCBBDD</strong> </mat-hint>
+            <mat-hint align="end">{{colorBack.value.length}} / {{ updateColorBackMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['colorBack'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorBack'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['colorBack'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" class="text-primary elemento-margen"
+        [disabled]="!grupoForm.valid">GUARDAR</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

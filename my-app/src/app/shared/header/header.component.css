@@ -1,0 +1,21 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.margen-der {
+  margin-right: 50px;
+}
+
+.logo {
+  height: 52px;
+  width: 52px;
+}
+/*Top toolbar*/
+.header-toolbar {
+  position: fixed;
+  z-index: 2;
+}

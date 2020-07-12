@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="container h-100">
+
+  <div class="row align-items-center h-100">
+    <div class="col-lg-6 col-md-10 col-sm-12 mx-auto">
+
+      <mat-card class="example-card mat-elevation-z4">
+        <form [formGroup]="grupoForm" (submit)="login()">
+          <mat-card-header>
+            <mat-card-title class="text-secondary">
+              <mat-icon class="aligned-vertical-icon-title">school</mat-icon>
+              {{title}}
+            </mat-card-title>
+            <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-sm">
+                <mat-form-field class="elemento-margen example-full-width">
+                  <mat-icon matPrefix  class="aligned-vertical-icon">account_circle</mat-icon>
+                  <input matInput type="text" #usuario required value="" placeholder="Usuario" [type]="hideUser ? 'password' : 'text'" formControlName="usuario">
+                  <button type="button" mat-icon-button matSuffix (click)="hideUser = !hideUser" [attr.aria-label]="'Hide user'" [attr.aria-pressed]="hideUser">
+                    <mat-icon>{{hideUser ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  <mat-hint align="end">{{usuario.value.length}} / {{ validateUsuarioMax}}</mat-hint>
+                  <mat-error *ngIf="grupoForm.controls['usuario'].hasError('required')">
+                    Este campo es <strong>obligatorio</strong>
+                  </mat-error>
+                  <mat-error *ngIf="grupoForm.controls['usuario'].hasError('pattern')">
+                    Contiene <strong>caracteres no permitidos</strong>
+                  </mat-error>
+                  <mat-error *ngIf="grupoForm.controls['usuario'].hasError('maxlength')">
+                    Se superó el<strong>máximo de caracteres </strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <mat-form-field class="elemento-margen example-full-width">
+                  <mat-icon matPrefix class="aligned-vertical-icon">fingerprint</mat-icon>
+                  <input matInput type="password" #clave required value="" placeholder="Clave"  [type]="hidePassword ? 'password' : 'text'" formControlName="clave">
+                  
+                  <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+
+                  <!-- <mat-hint align="end">{{clave.value.length}} / {{ validateClaveMax}}</mat-hint> -->
+                  <mat-error *ngIf="grupoForm.controls['clave'].hasError('required')">
+                    Este campo es <strong>obligatorio</strong>
+                  </mat-error>
+                  <mat-error *ngIf="grupoForm.controls['clave'].hasError('pattern')">
+                    Contiene <strong>caracteres no permitidos</strong>
+                  </mat-error>
+                  <mat-error *ngIf="grupoForm.controls['clave'].hasError('maxlength')">
+                    Se superó el<strong>máximo de caracteres </strong> {{clave.value.length}} / {{ validateClaveMax}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-sm">
+              <mat-form-field class="elemento-margen example-full-width">
+                <mat-icon matPrefix  class="aligned-vertical-icon">date_range</mat-icon>
+                <mat-select placeholder="Año" #anio required formControlName="anio">
+                  <mat-option *ngFor="let anio of selectAnios" [value]="anio.id">
+                    {{anio.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="grupoForm.controls['anio'].hasError('required')">
+                  Este campo es <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-actions class="text-right">
+            <!-- <button mat-flat-button color="basic" class="text-secondary elemento-margen">CANCELAR</button> -->
+            <button mat-stroked-button color="primary" type="submit" class="elemento-margen"
+              [disabled]="!grupoForm.valid" style=" width:100%"> 
+              <mat-icon aria-label="Ingresar al sistema">send</mat-icon>
+              Entrar al sistema
+            </button>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

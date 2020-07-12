@@ -1,0 +1,35 @@
+/* table {
+    width: 100%;
+    text-align: center; 
+  }
+table:th {
+  text-align: center; 
+}
+th.mat-header-cell {
+  text-align: center; 
+} */
+
+.app-button-row button,
+.app-button-row a {
+  margin-right: 8px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.espacio-boton {
+  margin-left: 1.0em;
+}
+
+.md-dialog-container {
+  background-color: #000;
+  width: 250px;
+  height: 250px
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.full-width-table {
+  width: 100%;
+}

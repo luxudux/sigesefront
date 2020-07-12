@@ -1,0 +1,196 @@
+<mat-form-field>
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+</mat-form-field>
+
+
+<div class="mat-elevation-z2">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements" matSortActive="id"
+    matSortDirection="desc">
+
+    <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of   displayedColumns">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}}</td>
+    </ng-container> -->
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Subject Column -->
+    <ng-container matColumnDef="subject">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tema</th>
+      <td mat-cell *matCellDef="let row">{{row.subject}}</td>
+    </ng-container>
+    <!--Expiration Column -->
+    <ng-container matColumnDef="expiration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiración</th>
+      <td mat-cell *matCellDef="let row">{{row.expiration | date: "dd/MM/yyyy HH:mm:ss"}}</td>
+    </ng-container>
+
+    <!-- ExpiresIn Column -->
+    <ng-container matColumnDef="expiresIn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Caduca</th>
+      <td mat-cell *matCellDef="let row">{{ getDiferenceNow(row.expiration) }}</td>
+    </ng-container>
+
+    <!-- TypeName Column -->
+    <ng-container matColumnDef="type_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+      <td mat-cell *matCellDef="let row">{{ row.type_name }}</td>
+    </ng-container>
+    
+    <!-- Conclution_id Column -->
+    <ng-container matColumnDef="conclution_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ConclusiónId</th>
+      <td mat-cell *matCellDef="let row">{{row.conclution_id}}</td>
+    </ng-container>
+
+    <!-- Preference_id Column -->
+    <ng-container matColumnDef="preference_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>PrioridadId</th>
+      <td mat-cell *matCellDef="let row">{{row.preference_id}}</td>
+    </ng-container>
+
+    <!-- Url Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Url</th>
+      <td mat-cell *matCellDef="let row">{{row.url}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+
+        <!-- <div class="app-button-row" class="text-right">
+          <button mat-mini-fab color="warn" class="espacio-boton" (click)="openDialogAdd()">
+            <mat-icon color="basic">add</mat-icon>
+          </button>
+        </div> -->
+
+      </th>
+      <td mat-cell *matCellDef="let element">
+
+        <div class="app-button-row">
+          <!-- Menu -->
+          <mat-menu #appMenuDelegation="matMenu">
+            <button mat-menu-item (click)="openDialogOpen(element)">
+              <mat-icon>open_in_browser</mat-icon>
+              <span>Abrir</span>
+            </button>
+            <button mat-menu-item (click)="openDialogFinishied(element)">
+              <mat-icon>assignment_turned_in</mat-icon>
+              <span>Finalizar</span>
+            </button>
+            <!-- <button mat-menu-item (click)="openDialogDelete(element)">
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar</span>
+            </button> -->
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenuDelegation">
+            <mat-icon class="text-secondary">more_vert</mat-icon>
+          </button>
+          <!-- End Menu -->
+        </div>
+      </td>
+    </ng-container>
+
+
+
+
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="  displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+          <!-- <div class="example-element-diagram">
+         <div class="example-element-id"> {{element.id}} </div>
+         <div class="example-element-subject"> {{element.subject}} </div>
+         <div class="example-element-expiration"> {{element.expiration}} </div>
+         <div class="example-element-conclution_id"> {{element.conclution_id}} </div>
+       </div> -->
+          <div class="container">
+            <!-- <div class="row">
+              <div class="col-sm-2  col-lg-1">Titulo1: </div>
+              <div class="col-sm-10 col-lg-5">{{element.preference_id}}</div>
+              <div class="col-sm-2  col-lg-1">Título2: </div>
+              <div class="col-sm-10 col-lg-5"> Descripción </div>
+            </div> -->
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">mode_comment</mat-icon>
+                      Título1:
+                    </span>
+                    <p class="font-weight-light">
+                      Cras justo odio
+                      <span class="badge badge-light">Light</span>
+                      <span class="badge badge-success">Light</span>
+                      <span class="badge badge-warning">warning</span>
+                    </p>
+                  </li>
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">perm_phone_msg</mat-icon>
+                      Título2:
+                    </span>
+                    <p class="font-weight-light">Dapibus ac facilisis in</p>
+                  </li>
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">call_received</mat-icon>
+                      Título3:
+                    </span>
+                    <p class="font-weight-light">Morbi leo risus</p>
+                  </li>
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">comment</mat-icon>
+                      Título4:
+                    </span>
+                    <p class="font-weight-light">Porta ac consectetur ac</p>
+                  </li>
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">notes</mat-icon>
+                      Título5:
+                    </span>
+                    <p class="font-weight-light">Vestibulum at eros</p>
+                  </li>
+                  <li class="list-group-item efect-hover">
+                    <span class="font-weight-bold">
+                      <mat-icon class="text-secondary">mail_outline</mat-icon>
+                      Título5:
+                    </span>
+                    <p class="font-weight-light">Vestibulum at eros</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <!-- <div class="example-element-description"> Aqui se pone la descripción
+            {{element.preference_id}}
+
+          </div> -->
+
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="  displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns:   displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (dblclick)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+
+</div>

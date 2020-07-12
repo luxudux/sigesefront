@@ -1,0 +1,94 @@
+<mat-card>
+  <form [formGroup]="grupoForm" (submit)="createResource()">
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>add</mat-icon>
+        <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #nombre value="" placeholder="Nombre" formControlName="nombre">
+            <mat-hint align="end">{{nombre.value.length}} / {{ updateNombreMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <mat-select placeholder="Nivel" formControlName="nivel">
+              <mat-option *ngFor="let nivel of selectNiveles" [value]="nivel.id">
+                {{nivel.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['nivel'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="password" #clave value="" placeholder="Clave" formControlName="clave">
+            <mat-hint align="end">{{clave.value.length}} / {{ updateClaveMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['clave'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['clave'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['clave'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="password" #rclave value="" placeholder="Confirmar Clave" formControlName="rclave"
+              pattern="{{ clave.value }}">
+            <mat-hint align="end">{{rclave.value.length}} / {{ updateClaveMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['rclave'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['rclave'].hasError('pattern')">
+              No coinciden las contraseñas
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen example-full-width">
+            <mat-select placeholder="Oficinas" formControlName="oficina">
+              <mat-option *ngFor="let oficina of selectOficinas" [value]="oficina.id">
+                {{oficina.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['oficina'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" class="text-primary elemento-margen"
+        [disabled]="!grupoForm.valid">GUARDAR</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

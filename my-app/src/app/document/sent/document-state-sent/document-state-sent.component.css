@@ -1,0 +1,28 @@
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .app-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .margen-mensaje {
+    margin-top: 2em;
+  }
+  
+  .aligned-with-icon {
+    position: absolute;
+    padding-bottom: 2.5em;
+    margin-left: 0.5em;
+  }
+  

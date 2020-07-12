@@ -1,0 +1,9 @@
+.example-card {
+  max-width: 400px;
+}
+
+.aligned-with-icon {
+  position: absolute;
+  padding-bottom: 2.5em;
+  margin-left: 0.5em;
+}

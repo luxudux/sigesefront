@@ -1,0 +1,127 @@
+<mat-sidenav-container class="sidenav-container mat-elevation-z2">
+  <mat-sidenav #drawer class="sidenav mat-elevation-z3" fixedInViewport="true"
+      fixedBottomGap="0"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+      <mat-toolbar><mat-icon matListIcon>home</mat-icon> Menú </mat-toolbar>
+
+    
+    
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Catálogos:</h3>
+      <a mat-list-item  class="text-secondary" (click)="nombreModulo='Catálogos de usuarios'; showComponent('users')"
+      [ngClass]="{'active' : listUsers==true}" >
+          <mat-icon matListIcon>group</mat-icon>
+          <span>Usuarios</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de delegaciones'; showComponent('delegations')"
+      [ngClass]="{'active' : listDelegations==true}">
+          <mat-icon matListIcon>scatter_plot</mat-icon>
+          <span>Delegaciones</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Tipos de documentos'; showComponent('types')"
+      [ngClass]="{'active' : listTypes==true}">
+          <mat-icon matListIcon>category</mat-icon>
+          <span>Tipos</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de ciudades'; showComponent('towns')"
+      [ngClass]="{'active' : listTowns==true}">
+          <mat-icon matListIcon>location_on</mat-icon>
+          <span>Ciudades</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de estados'; showComponent('state')"
+      [ngClass]="{'active' : listStates==true}">
+          <mat-icon matListIcon>linear_scale</mat-icon>
+          <span>Estados</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de prioridades'; showComponent('preferences')"
+      [ngClass]="{'active' : listPreferences==true}">
+          <mat-icon matListIcon>priority_high</mat-icon>
+          <span>Prioridades</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de niveles'; showComponent('levels')"
+      [ngClass]="{'active' : listLevels==true}">
+          <mat-icon matListIcon>tune</mat-icon>
+          <span>Niveles</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogo de oficinas'; showComponent('offices')"
+      [ngClass]="{'active' : listOffices==true}">
+          <mat-icon matListIcon>domain</mat-icon>
+          <span>Oficinas</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de conclusiones'; showComponent('conclutions')"
+      [ngClass]="{'active' : listConclutions==true}">
+          <mat-icon matListIcon>timeline</mat-icon>
+          <span>Conclusiones</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Catálogos de permisos'; showComponent('permits')"
+      [ngClass]="{'active' : listPermits==true}">
+          <mat-icon matListIcon>folder_shared</mat-icon>
+          <span>Permisos</span>
+      </a>
+      <app-nav-logout></app-nav-logout>
+    </mat-nav-list>
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z3">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>SIGESE</span>
+
+      <!-- LOGO -->
+      <span class="example-spacer"></span>
+      <app-nav-sup-cen></app-nav-sup-cen>
+      <span class="example-spacer"></span>
+      <!-- HERRAMIENTAS -->
+      
+      <app-nav-sup-der></app-nav-sup-der>
+      
+    </mat-toolbar>
+      <!-- BREADCRUMB -->
+      <app-nav-under [nameModule]="nombreModulo" [nameLevel]="nombreNivel"></app-nav-under>
+    <!-- Add Content Here -->
+    <div class="container">
+
+      <!-- <h3>Raised Buttons</h3>
+      <div class="example-button-row">
+        <button mat-raised-button>Basic</button>
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+        <button mat-raised-button disabled>Disabled</button>
+        <a mat-raised-button routerLink=".">Link</a>
+      </div> -->
+      
+      <app-delegation-list *ngIf="listDelegations"></app-delegation-list>
+      <app-type-list *ngIf="listTypes"></app-type-list>
+      <app-town-list *ngIf="listTowns"></app-town-list>
+      <app-user-list *ngIf="listUsers"></app-user-list>
+      <!-- <app-worker-list *ngIf="listWorkers"></app-worker-list> -->
+      <app-state-list *ngIf="listStates"></app-state-list>
+      <app-preference-list *ngIf='listPreferences'></app-preference-list>
+      <app-level-list *ngIf='listLevels'></app-level-list>
+      <app-office-list *ngIf='listOffices'></app-office-list>
+      <app-conclution-list *ngIf='listConclutions'></app-conclution-list>
+      <app-permit-list *ngIf='listPermits'></app-permit-list>
+      <!-- <p>active module User: {{ listUsers }} </p>
+      <p>active module Woker: {{ listWorkers }} </p>
+      <p>active module Delegation: {{ listDelegations }} </p>
+      <p>active module Statu: {{ listStates }} </p>
+      <p>active module Preference: {{ listPreferences }} </p>
+      <p>active module Level: {{ listLevels }} </p> -->
+      
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-footer></app-footer>

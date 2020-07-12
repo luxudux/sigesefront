@@ -1,0 +1,53 @@
+<mat-card>
+  <form [formGroup]="grupoForm" (submit)="updateResource(grupoForm)">
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>edit</mat-icon>
+          <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" value={{updateNo}} placeholder="No." #id readonly>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen example-full-width">
+            <mat-select placeholder="Usuario" value="" formControlName="usuario">
+              <mat-option *ngFor="let usuario of selectUsuarios" [value]="usuario.id">
+                {{usuario.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['usuario'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen example-full-width">
+            <mat-select placeholder="Oficina"value=""  formControlName="oficina">
+              <mat-option *ngFor="let oficina of selectOficinas" [value]="oficina.id">
+                {{oficina.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['oficina'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" type="submit" class="text-success elemento-margen"
+        [disabled]="!grupoForm.valid">ACTUALIZAR</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

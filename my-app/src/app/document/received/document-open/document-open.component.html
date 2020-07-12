@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="text-secondary">
+      <mat-icon>notes</mat-icon>
+      <span class="aligned-with-icon">{{title}}</span>
+    </mat-card-title>
+    <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="content">
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #numero value="1" placeholder="No" disabled>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #tema value="2" placeholder="Tema" disabled>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #expiracion value="3" placeholder="Expiracion" disabled>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #conclusion value="4" placeholder="Conclusion" disabled>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #prioridad value="5" placeholder="Prioridad" disabled>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #url value="6" placeholder="Url" disabled>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+  <mat-card-actions class="text-right">
+    <!-- <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+    <button mat-flat-button color="basic" class="text-danger elemento-margen">ELIMINAR</button> -->
+  </mat-card-actions>
+
+</mat-card>

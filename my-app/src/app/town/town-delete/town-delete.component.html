@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>delete</mat-icon>
+        <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-danger margen-mensaje" role="alert">
+              ¡ Está a punto de eliminar el registro <strong>{{deleteNo}} : {{deleteNombre}}</strong> !
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" class="text-danger elemento-margen"
+        (click)="deleteResource(deleteNo)">ELIMINAR</button>
+    </mat-card-actions>
+  
+  </mat-card>

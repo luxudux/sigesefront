@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="text-secondary">
+      <mat-icon>redo</mat-icon>
+      <span class="aligned-with-icon">{{title}}</span>
+    </mat-card-title>
+    <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="content">
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-list>
+            <h3 mat-subheader>
+              {{toSubject}}
+            </h3>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let oficina of dataSourceOficinas">
+              <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+              <h4 mat-line> Delegación {{oficina.office_delegation}} - {{oficina.office_name}}</h4>
+              <p mat-line> Copia No. {{ oficina.id }} </p>
+              <button mat-icon-button (click)="openDialogState(oficina)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+  <mat-card-actions class="text-right">
+    <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CERRAR</button>
+    <!-- <button mat-flat-button color="basic" class="text-danger elemento-margen" -->
+    <!-- (click)="deleteResource(deleteNo)">ELIMINAR</button> -->
+  </mat-card-actions>
+
+</mat-card>

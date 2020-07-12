@@ -1,0 +1,26 @@
+.example-icon {
+    padding: 0 16px;
+    margin-right: 0.5em;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+  .normal {
+    font-style: normal;
+  }
+  
+  .izquierda {
+    font-weight: normal;
+    font-size: 0.98em;
+  }
+  
+  .centro {
+    font-weight: normal;
+    font-size: 0.7em;
+  }

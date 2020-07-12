@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb" class=" mat-elevation-z2">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a>Home</a></li>
+    <li class="breadcrumb-item"><a>2019</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{nameModule}}</li>
+
+    <li class="ml-auto font-weight-light text-success">
+      ({{nameLevel}}) {{ PermisoService.activoNombre }}
+      <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" 
+      [disabled]="disabled"  matTooltip="{{messageTooltip}}" (change)="HistorialAccion()">
+      </mat-slide-toggle>
+    </li>
+
+  </ol>
+</nav>

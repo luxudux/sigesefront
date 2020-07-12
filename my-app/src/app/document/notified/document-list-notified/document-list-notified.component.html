@@ -1,0 +1,101 @@
+<mat-form-field>
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+</mat-form-field>
+
+
+<div class="mat-elevation-z2">
+  <table mat-table #myTable class="full-width-table table-hover" [dataSource]="dataSource" matSort aria-label="Elements"
+    matSortActive="id" matSortDirection="desc">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Subject Column -->
+    <ng-container matColumnDef="subject">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tema</th>
+      <td mat-cell *matCellDef="let row">{{row.subject}}</td>
+    </ng-container>
+
+    <!--Expiration Column -->
+    <ng-container matColumnDef="expiration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiración</th>
+      <td mat-cell *matCellDef="let row">{{row.expiration | date: "dd/MM/yyyy HH:mm:ss"}}</td>
+    </ng-container>
+
+    <!-- ExpiresIn Column -->
+    <ng-container matColumnDef="expiresIn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Caduca</th>
+      <td mat-cell *matCellDef="let row">{{ getDiferenceNow(row.expiration) }}</td>
+    </ng-container>
+
+    <!-- TypeName Column -->
+    <ng-container matColumnDef="type_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+      <td mat-cell *matCellDef="let row">{{ row.type_name }}</td>
+    </ng-container>
+    
+    <!-- Conclution_id Column -->
+    <ng-container matColumnDef="conclution_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ConclusiónId</th>
+      <td mat-cell *matCellDef="let row">{{row.conclution_id}}</td>
+    </ng-container>
+
+    <!-- Preference_id Column -->
+    <ng-container matColumnDef="preference_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>PrioridadId</th>
+      <td mat-cell *matCellDef="let row">{{row.preference_id}}</td>
+    </ng-container>
+
+    <!-- Url Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Url</th>
+      <td mat-cell *matCellDef="let row">{{row.url}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+
+        <!-- <div class="app-button-row" class="text-right">
+            <button mat-mini-fab color="warn" class="espacio-boton" (click)="openDialogAdd()">
+              <mat-icon color="basic">add</mat-icon>
+            </button>
+          </div> -->
+
+      </th>
+      <td mat-cell *matCellDef="let element">
+
+        <div class="app-button-row">
+          <!-- Menu -->
+          <mat-menu #appMenuDelegation="matMenu">
+            <button mat-menu-item (click)="openDialogOpen(element)">
+              <mat-icon>open_in_browser</mat-icon>
+              <span>Abrir</span>
+            </button>
+            <button mat-menu-item (click)="openDialogExecuted(element)">
+              <mat-icon>assignment_ind</mat-icon>
+              <span>Asignar ejecutor</span>
+            </button>
+            <!-- <button mat-menu-item (click)="openDialogDelete(element)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button> -->
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenuDelegation">
+            <mat-icon class="text-secondary">more_vert</mat-icon>
+          </button>
+          <!-- End Menu -->
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+
+</div>

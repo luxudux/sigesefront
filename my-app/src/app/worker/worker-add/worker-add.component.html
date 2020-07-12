@@ -1,0 +1,92 @@
+<mat-card>
+  <form [formGroup]="grupoForm" (submit)=createResource()>
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>add</mat-icon>
+        <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #nombre value="" placeholder="Nombre" formControlName="nombre">
+            <mat-hint align="end">{{nombre.value.length}} / {{ updateNombreMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['nombre'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" #apellido value="" placeholder="Apellido" formControlName="apellido">
+            <mat-hint align="end">{{apellido.value.length}} / {{ updateApellidoMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['apellido'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['apellido'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['apellido'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput #correo placeholder="Correo-e" formControlName="correo">
+            <mat-error
+              *ngIf="grupoForm.controls['correo'].hasError('email') && !grupoForm.controls['correo'].hasError('required')">
+              Ingrese un formato válido.
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['correo'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <mat-select placeholder="Genero" required formControlName="genero">
+              <mat-option *ngFor="let genero of GeneroService.getLista()" [value]="genero.id">
+                {{genero.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['genero'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <mat-select placeholder="Activo" required formControlName="activo">
+              <mat-option *ngFor="let activos of ActivoService.getLista()" [value]="activos.id">
+                {{activos.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['activo'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" type="submit" class="text-primary elemento-margen"
+        [disabled]="!grupoForm.valid">GUARDAR</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,39 @@
+.example-card {
+    max-width: 500px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .app-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .elemento-margen {
+    margin-top: 0.6em;
+  }
+  .aligned-vertical-icon-title{
+    vertical-align: bottom;
+    margin-bottom: 0.2em;
+    /* margin-right: 0.5em; */
+  }
+  .aligned-vertical-icon{
+    vertical-align: bottom;
+    /* margin-left: 0.5em; */
+    margin-right: 0.5em;
+  }
+  .aligned-with-icon {
+    position: absolute;
+    /* padding-bottom: 2.0em; */
+    padding-top: 0.2em;
+    /* margin-left: 0.5em; */
+  }
+  .mat-card-header { justify-content: center; }
+  

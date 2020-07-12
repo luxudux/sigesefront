@@ -1,0 +1,139 @@
+<mat-card>
+  <form [formGroup]="grupoForm" (submit)="updateResource(grupoForm)">
+    <mat-card-header>
+      <mat-card-title class="text-secondary">
+        <mat-icon>edit</mat-icon>
+        <span class="aligned-with-icon">{{title}}</span>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>Delegaciones</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput type="text" value="{{updateNo}}" placeholder="No." #id readonly>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput #inicio [value]="" [matDatepickerFilter]="entreSemanaFilter" [matDatepicker]="pickerInicial"
+              placeholder="Fecha de inicio" required formControlName="inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicial></mat-datepicker>
+            <mat-hint>mm/dd/yyyy</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['inicio'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput [ngxTimepicker]="inicioHoraNgx" [format]="24" #inicioHora placeholder="Hora Inicio"
+              formControlName="inicioHora" readonly>
+            <ngx-material-timepicker #inicioHoraNgx [ngxMaterialTimepickerTheme]="ngxTimepickerTheme">
+            </ngx-material-timepicker>
+            <mat-hint>24 Hrs.</mat-hint>
+            <mat-hint align="end">{{inicioHora.value.length}} / {{ updateinicioHoraMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['inicioHora'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['inicioHora'].hasError('pattern')">
+              Contiene <strong>formato no permitido</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['inicioHora'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen example-full-width">
+            <input matInput type="text" #titulo value={{updateTitulo}} placeholder="Titulo" formControlName="titulo">
+            <mat-hint align="end">{{titulo.value.length}} / {{ updateTituloMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['titulo'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['titulo'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['titulo'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen example-full-width">
+            <input matInput type="text" #descripcion value={{updateDescripcion}} placeholder="Descripcion"
+              formControlName="descripcion">
+            <mat-hint align="end">{{descripcion.value.length}} / {{ updateDescripcionMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['descripcion'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['descripcion'].hasError('pattern')">
+              Contiene <strong>caracteres no permitidos</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['descripcion'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <mat-select placeholder="Prioridad" #prioridad [(value)]="updatePrioridad" required
+              formControlName="prioridad">
+              <mat-option *ngFor="let prioridad of selectPrioridades" [value]="prioridad.id">
+                {{prioridad.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="grupoForm.controls['prioridad'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="elemento-margen">
+            <input matInput #final [value]="" [matDatepickerFilter]="entreSemanaFilter" [matDatepicker]="pickerFinal"
+              placeholder="Fecha final" required formControlName="final">
+            <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+            <mat-hint>mm/dd/yyyy</mat-hint>
+            <mat-datepicker #pickerFinal></mat-datepicker>
+            <mat-error *ngIf="grupoForm.controls['final'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm float-left">
+          <mat-form-field class="elemento-margen">
+            <input matInput [ngxTimepicker]="finalHoraNgx" [format]="24" #finalHora placeholder="Hora Final"
+              formControlName="finalHora" readonly>
+            <ngx-material-timepicker #finalHoraNgx [ngxMaterialTimepickerTheme]="ngxTimepickerTheme">
+            </ngx-material-timepicker>
+            <mat-hint>24 Hrs.</mat-hint>
+            <mat-hint align="end">{{finalHora.value.length}} / {{ updateFinalHoraMax}}</mat-hint>
+            <mat-error *ngIf="grupoForm.controls['finalHora'].hasError('required')">
+              Este campo es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['finalHora'].hasError('pattern')">
+              Contiene <strong>formato no permitido</strong>
+            </mat-error>
+            <mat-error *ngIf="grupoForm.controls['finalHora'].hasError('maxlength')">
+              Se superó el<strong>máximo de caracteres </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="text-right">
+      <button mat-flat-button mat-dialog-close color="basic" class="text-secondary elemento-margen">CANCELAR</button>
+      <button mat-flat-button color="basic" type="submit" class="text-success elemento-margen"
+        [disabled]="!grupoForm.valid">ACTUALIZAR</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

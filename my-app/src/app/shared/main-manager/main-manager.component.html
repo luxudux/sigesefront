@@ -1,0 +1,104 @@
+<mat-sidenav-container class="sidenav-container mat-elevation-z2">
+  <mat-sidenav #drawer class="sidenav mat-elevation-z3" fixedInViewport="true" fixedBottomGap="0" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar>
+      <mat-icon matListIcon>home</mat-icon> Menú
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Documentos</h3>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Documentos enviados';
+        showComponent('documentsSent')"
+        [ngClass]="{'active' : listDocumentsSent==true}">
+        <mat-icon matListIcon>send</mat-icon>
+        <span class="font-italic">Enviados</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Documentos notificados';
+        showComponent('documentsNotified')"
+        [ngClass]="{'active' : listDocumentsNotified==true}">
+        <mat-icon matListIcon>notifications_none</mat-icon>
+        <span class="font-italic">Notificados</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Documentos ejecutados';
+        showComponent('documentsExecuted')"
+        [ngClass]="{'active' : listDocumentsExecuted==true}">
+        <mat-icon matListIcon>how_to_reg</mat-icon>
+        <span class="font-italic">Ejecutados</span>
+      </a>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Documentos finalizados'; 
+      showComponent('documentsFinished')"
+        [ngClass]="{'active' : listDocumentsFinished==true}">
+        <mat-icon matListIcon>outlined_flag</mat-icon>
+        <span class="font-italic">Finalizados</span>
+      </a>
+      <mat-divider></mat-divider>
+      <!-- <h3 matSubheader>Llamadas</h3>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Llamadas recibidas';
+        showComponent('callsReceived')"
+        [ngClass]="{'active' : listCallsReceived==true}">
+        <mat-icon matListIcon>chevron_right</mat-icon>
+        <span class="font-italic">Recibidas</span>
+      </a>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Eventos</h3>
+      <a mat-list-item class="text-secondary" (click)="nombreModulo='Eventos registrados';
+        showComponent('eventsRegistered')"
+        [ngClass]="{'active' : listEvents==true}">
+        <mat-icon matListIcon>chevron_right</mat-icon>
+        <span class="font-italic">Registrados</span>
+      </a> -->
+      <app-nav-logout></app-nav-logout>
+    </mat-nav-list>
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z3">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>SIGESE</span>
+
+      <!-- LOGO -->
+      <span class="example-spacer"></span>
+      <app-nav-sup-cen></app-nav-sup-cen>
+      <span class="example-spacer"></span>
+      <!-- HERRAMIENTAS -->
+
+      <app-nav-sup-der></app-nav-sup-der>
+
+    </mat-toolbar>
+    <!-- BREADCRUMB -->
+    <app-nav-under [nameModule]="nombreModulo" [nameLevel]="nombreNivel"></app-nav-under>
+    <!-- Add Content Here -->
+    <div class="container">
+
+      <app-document-list-notified *ngIf="listDocumentsNotified"></app-document-list-notified>
+      <app-document-list-executed *ngIf="listDocumentsExecuted"></app-document-list-executed>
+      <app-document-list-sent *ngIf="listDocumentsSent"></app-document-list-sent>
+      <app-document-list-finished *ngIf="listDocumentsFinished"></app-document-list-finished>
+      <app-call-list *ngIf="listCallsReceived"></app-call-list>
+      <app-event-list *ngIf="listEvents"></app-event-list>
+
+      <!-- <h3>Raised Buttons</h3>
+      <div class="example-button-row">
+        <button mat-raised-button>Basic</button>
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+        <button mat-raised-button disabled>Disabled</button>
+        <a mat-raised-button routerLink=".">Link</a>
+      </div>
+
+      <p>active module listDocumentsNotified: {{ listDocumentsNotified }} </p>
+      <p>active module listDocumentsExecuted: {{ listDocumentsExecuted }} </p>
+      <p>active module listCallsReceived: {{ listCallsReceived }} </p>
+      <p>active module listEvents: {{ listEvents }} </p> -->
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-footer></app-footer>
